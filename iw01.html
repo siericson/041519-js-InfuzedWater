@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfuZed water</title>
+    <link rel="stylesheet" href="styles/iw.css">
+</head>
+<body>
+    <main id="wrapper">
+        <h1>InfuZed Waters</h1>
+        <h2>Thirst quencing fruit infuZed goodness</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum delectus, dolores sequi voluptate in, molestias quo ullam veniam voluptatem perferendis odio quos blanditiis laudantium eos eaque a laboriosam necessitatibus esse.</p>
+        <h2>Here are some of our favorite summer blends</h2>
+        <section id="tab-group">
+            <h3 class="tab-header active" id="tab-header-1">Blueberry+Lavender</h3>
+            <article class="tab-content active" id="tab-content-1">
+                <img src="images/blueBerryLav.jpg" alt="water">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis mollitia magni a minus ad iste aspernatur, ducimus porro, voluptatum quisquam nam. Odit quasi, eaque laborum eos recusandae odio iusto. Dolores!</p>
+            </article>
+            <h3 class="tab-header" id="tab-header-2">Watermelon+Mint</h3>
+            <article class="tab-content" id="tab-content-2">
+                <img src="images/watermelonMint.jpg" alt="water">
+                <p>A, in! Porro, cumque. Cum dolor quibusdam voluptates magnam, sed itaque nesciunt perspiciatis et accusamus neque, debitis nulla. Quod soluta cum eveniet porro ratione autem, cumque quis alias quia quos.</p>
+            </article>
+            <h3 class="tab-header" id="tab-header-3">Rasberry+Rose+Vanilla</h3>
+            <article class="tab-content" id="tab-content-3">
+                <img src="images/rosemerry.jpg" alt="water">
+                <p>Sequi mollitia ipsa voluptatem tempora dicta nostrum! Incidunt aperiam neque, dignissimos commodi sed libero quia labore, natus facilis fugiat accusamus reiciendis. Vitae laboriosam quod ullam possimus maiores inventore magnam nulla!</p>
+            </article>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            document.getElementById('tab-group').className = 'ready';
+            
+            var tabSelect = 'tab-header',
+                tabContent = 'tab-content';
+            
+            document.getElementById('tab-group').addEventListener('click', function(event){
+                
+                var myHeader = event.target;
+                
+                if (myHeader.className != tabSelect) return;
+                
+                var myID = myHeader.id, // tab-header-1,2,3
+                    contentID = myID.replace('header', 'content'); // result: tab-cont-
+                deactivateAllTabs();
+                
+                myHeader.className = tabSelect + ' active';
+                document.getElementById(contentID).className = tabContent + ' active';
+                
+                // remove the active class from everything
+                    
+            }) // end event on tab-group
+            
+            function deactivateAllTabs(){
+                var tabHeaders = document.getElementsByClassName(tabSelect),
+                    tabContents = document.getElementsByClassName(tabContent);
+                for (var i = 0; i < tabHeaders.length; i++) {
+                    tabHeaders[i].className = tabSelect;
+                    tabContents[i].className = tabContent;
+                }
+            } // end deactivateAllTabs
+        }) // end event on DOMContent
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

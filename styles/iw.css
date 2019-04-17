@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+section, article, main, aside, footer, nav, video, audio, header,figure, picture {
+    display: block;
+}
+body {
+    font-family: arial, helvetica, sans-serif;
+    background: url(../images/infusedWater.jpg) no-repeat fixed right bottom;
+}
+#wrapper {
+    margin: 2em auto;
+    padding: 2em;
+    max-width: 660px;
+    border: solid 3px #d3e303;
+    background-color: rgba(255,255,255,.85);
+    border-radius: 15px;
+    position: relative;
+}
+h1 {
+    color: #9da40e;
+    margin-bottom: .25em;
+}
+h2 {
+    color: #951837;
+    margin: .5em 0 .25em;
+}
+h3 {
+    color: #f95b2b;
+    margin: .5em 0 .25em;
+}
+p {
+    color: #333;
+    margin-bottom: .5em;
+}
+a {
+    color: #f95b2b;
+}
+a:hover {
+    color: #9da40e;
+}
+img {
+    float: right;
+    margin: .5em 0 1em 1em;
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+}
+.tab-content {
+    clear: both;
+}
+.ready {
+    position: relative;
+    margin-bottom: 2em;
+}
+#tab-group.ready .tab-header {
+    font-weight: normal;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: .25em .5em;
+}
+.ready .tab-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    color: white;
+    background-color: #9da40e;
+    border: solid 1px #9da40e;
+    border-radius: 4px 4px 0 0;
+    z-index: 2;
+    cursor: pointer;
+}
+.ready .tab-header.active {
+    background-color: white;
+    border-bottom-color: white;
+    color: #9da40e;
+}
+.ready .tab-content {
+    position: relative;
+    top: 24px;
+    padding: 0 .5em;
+    border: solid 1px #9da40e;
+    border-radius: 0 6px 6px 6px;
+    z-index: 1;
+    background-color: white;
+    display: none;
+    
+}
+.ready .tab-content:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.ready #tab-header-2 {
+    left: 14em;
+}
+.ready #tab-header-3 {
+    left: 26.1em;
+}
+.ready .tab-content p {
+    padding: .5em 0 1em;
+}
+.ready .tab-content.active {
+    display: block;
+}
+.cart .info {
+    margin-bottom: .4em;
+}
+.cart .group {
+    margin-bottom: .5em;
+}
+.cart #results {
+    font-size: 93%;
+    color: #777;
+    min-width: 20em;
+    padding: 1em 15.5em;
+    font-style: italic;
+}
+label {
+    color: #333;
+}
+input:focus, select:focus {
+    outline-color: #d3e203;
+    background-color: lemonchiffon;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfuZed water</title>
+    <link rel="stylesheet" href="styles/iw.css">
+</head>
+<body>
+    <main id="wrapper">
+       <h1>Shop</h1>
+       <p>Choose the waters you'd like to order, your shipping state and preferred shipping method and we will provide you with an estimated total</p>
+<!--       form#cart-water.cart>article.item*3>h2{Orange + Rasberry}+p{You've never tased water this delicious}+div.info>span{Price: #/bottle}^div.order>label{Quantity desired:}+input[type="text" size="3" placeholder="0"]-->
+       <form action="" id="cart-water" class="cart">
+           <article class="item">
+               <h2>Orange + Rasberry</h2>
+               <p>You've never tasted water this delicious</p>
+               <div class="info"><span>Price: $9/bottle</span></div>
+               <div class="order">
+                   <label for="txt-q-or">Quantity desired:</label>
+                   <input type="text" size="3" placeholder="0" id="txt-q-or">
+                </div>
+           </article>
+           <article class="item">
+               <h2>Cucumber + Mint</h2>
+               <p>Cool and refreshing, perfect on a summer day!</p>
+               <div class="info"><span>Price: $8/bottle</span></div>
+               <div class="order">
+                   <label for="txt-q-cm">Quantity desired:</label>
+                   <input type="text" size="3" placeholder="0" id="txt-q-cm">
+                </div>
+           </article>
+           <article class="item">
+               <h2>Orange + Rasberry</h2>
+               <p>Simply delicious!</p>
+               <div class="info"><span>Price: $8.50/bottle</span></div>
+               <div class="order">
+                   <label for="txt-q-sd">Quantity desired:</label>
+                   <input type="text" size="3" placeholder="0" id="txt-q-sd">
+                </div>
+           </article>
+           
+<!--           article#state>h2{Select your shipping state:}+div.group.state>label[for="s-state"]{State:}+select#s-state>option*5^div.group.method>label[for="r-method-xxxx"]{Shipping Method}+(br+input[type="radio" name="r-method" value="xxxx"]#r-method-xxxx+label[for="r-method-xxxx"])*3-->
+           
+           <article id="state">
+               <h2>Select your shipping state:</h2>
+               <div class="group state">
+                   <label for="s-state">State:</label>
+                   <select name="" id="s-state">
+                       <option value="">- select - </option>
+                       <option value="CA">California (7.75% tax)</option>
+                       <option value="WA">Washington</option>
+                       <option value="OR">Oregon</option>
+                       <option value="AZ">Arizona</option>
+                   </select>
+               </div>
+               <div class="group method">
+                   <label for="shipping-method">Shipping Method</label>
+                   <br>
+                   <input type="radio" name="r_method" value="pickup" id="r-method-xxxx">
+                   <label for="r-method-pickup">Pickup (free)</label>
+                   <br>
+                   <input type="radio" name="r_method" value="usps" id="r-method-usps">
+                   <label for="r-method-usps">US mail ($2/bottle)</label>
+                   <br>
+                   <input type="radio" name="r_method" value="ups" id="r-method-ups">
+                   <label for="r-method-ups">UPS ($3/bottle)</label>
+               </div>
+               
+<!--               div.group.calc>p>label{Click to estimate:}+input[type=submit]#btn-estimate+input[type=text placeholder=$0.00]#txt-estimate^div#results-->
+               
+               <div class="group calc">
+                   <p>
+                       <label for="btn-estimate">Click to estimate:
+                       </label>
+                       <input type="submit" id="btn-estimate" value="Estimate total">
+                       <input type="text" placeholder="$0.00" id="txt-estimate">
+                   </p>
+                   <div id="results">sample text</div>
+               </div>
+           </article>
+       </form>
+    </main>
+    <script>
+       "use strict";
+        
+        document.getElementById('cart-water').addEventListener('submit', estimateOrder, false);
+        
+        function estimateOrder(event) {
+            event.preventDefault();
+            
+            if (document.getElementById('s-state').value === ''){
+                alert('Please choose your shipping state.');
+                document.getElementById('s-state').focus();
+                return;    
+            }
+            
+            // collect bottle quantity
+            var btl1 = parseInt(document.getElementById('txt-q-or').value, 10) || 0,
+                btl2 = parseInt(document.getElementById('txt-q-cm').value, 10) || 0,
+                btl3 = parseInt(document.getElementById('txt-q-sd').value, 10) || 0;    
+            
+            var totalBottles = btl1+btl2+btl3;
+            
+            // collect state info
+            var state = document.getElementById('s-state').value,
+                shippingMethod,
+                methods = document.getElementById('cart-water').r_method;
+            
+            for (var i = 0; i<methods.length; i++) {
+                if(methods[i].checked == true) {
+                    shippingMethod = methods[i].value;
+                }
+            }
+            
+            // tax
+            var taxFactor = 1;
+            if(state === 'CA') {
+                taxFactor = 1.0775; 
+            }
+            
+            // Calculate shipping
+            var shippingCostPer = 0;
+            switch (shippingMethod) {
+                case 'pickup' : 
+                    shippingCostPer = 0;
+                    break;
+                case 'usps' : 
+                    shippingCostPer = 2;
+                    break;
+                case 'ups' : 
+                    shippingCostPer = 3;
+                    break;
+            }
+            
+            var shippingCost = totalBottles * shippingCostPer;
+            var subTotal = ((btl1 * 9) + (btl2 * 8) + (btl3 * 8.5)) * taxFactor;
+            
+            var estimate = '$' + (subTotal + shippingCost).toFixed(2);
+            
+            document.getElementById('txt-estimate').value = estimate;
+            
+            document.getElementById('results').innerHTML = 'Total bottles ordered: ' + totalBottles + '<br>' + 'Total shipping fees: ' + shippingCost + '<br>';
+            document.getElementById('results').innerHTML += 'Tax: ' + ((taxFactor-1)*100).toFixed(2) + '%';
+        } // end estimate order function
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
